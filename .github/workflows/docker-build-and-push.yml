@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     # Environment variable scoped to the job
     env:
-      IMAGE_TAG_BRANCH: ghcr.io/ableto-gabrielrodriguez/nginx:${GITHUB_REF_NAME}
+      IMAGE: ghcr.io/ableto-gabrielrodriguez/nginx
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     # Steps are equivalent to script section in GitLab
     steps:
@@ -24,6 +24,6 @@ jobs:
       - name: Login to GitHub Container Registry
         run: echo ${GITHUB_TOKEN} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
       - name: Build Docker image
-        run: docker build -t ${IMAGE_TAG_BRANCH} -f Dockerfile .
+        run: docker build -t "${IMAGE}:${GITHUB_REF_NAME}" -f Dockerfile .
       - name: Push Docker image
         run: docker push ${IMAGE_TAG_BRANCH}
