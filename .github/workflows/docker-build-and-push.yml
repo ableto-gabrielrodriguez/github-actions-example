@@ -15,7 +15,6 @@ jobs:
     runs-on: ubuntu-latest
     # Environment variable scoped to the job
     env:
-      #GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       IMAGE_TAG_BRANCH: ghcr.io/ableto-gabrielrodriguez/nginx:${{ github.ref_name }}
     # Steps are equivalent to script section in GitLab
     steps:
