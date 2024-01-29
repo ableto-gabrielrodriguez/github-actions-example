@@ -24,6 +24,8 @@ jobs:
       - name: Login to GitHub Container Registry
         run: echo ${GITHUB_TOKEN} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
       - name: Build Docker image
-        run: docker build -t "${IMAGE}:${GITHUB_REF_NAME}" -f Dockerfile .
+        run: |
+          export IMAGE_TAG_BRANCH="${IMAGE}:${GITHUB_REF_NAME}"
+          docker build -t "${IMAGE_TAG_BRANCH}" -f Dockerfile .
       - name: Push Docker image
         run: docker push ${IMAGE_TAG_BRANCH}
